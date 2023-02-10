@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile Details</title>
+  <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> 
+  {% comment %} <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> {% endcomment %}
+  {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> {% endcomment %}
+   
+  
+
+  <style>
+
+
+
+  
+  body {
+    position: relative; 
+    {% comment %} background-color: gray    {% endcomment %}
+  }
+
+.container {
+   margin-top:20px;
+   padding-left:0px; 
+   padding-right:0px; 
+  }
+  
+
+  @media screen and (min-width: 1124px) {
+  
+  .container{
+    margin-top:20px;
+    padding-left:90px; 
+    padding-right:90px; 
+  }
+    .card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+.footer {
+  
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding:30px;
+  background-color: gray;
+  color: white;
+  text-align: center;
+}
+  }
+ 
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+ 
+
+  #snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+.footer {
+  
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding:30px;
+  background-color: gray;
+  color: white;
+  text-align: center;
+}
+  </style>
+
+</head>
+<body>
+<br>
+
+
+
+  <!-- First Container -->
+  {% comment %} <img src="/static/1.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350"> {% endcomment %}
+<h3 class="margin bg-2 text-center">Your Profile</h3>
+{% for info in signup %}
+<div class="container">
+<div class="card bg-primary text-white">
+<br><br>
+<div class="row">
+    <div class="col-xs-6" style="padding-left:45px">
+        {% if info.profile_pic %}
+        <p><img src="/media/{{ info.profile_pic }}" class="img-responsive img-circle margin " alt="Avatar" style="width:30%"></p>
+    {% else %}
+        <p><img src="/static/user.jpg" class="img-responsive img-circle margin " alt="Avatar" style="width:30%"></p>
+        {% endif %}
+        <h4><b>{{ info.name }}</b></h4>
+    <p style="padding-bottom:20px">{{ info.highlite }}</p> 
+  </div>
+
+    <div class="col-xs-4" style="padding-top:10px" >
+    <p><span class="glyphicon glyphicon-phone"></span> {{ info.contact }}</p>
+    <p><span class="glyphicon glyphicon-envelope"></span> {{ info.email }}</p>  
+    <p><span class="glyphicon glyphicon-map-marker"></span> {{ info.location }}</p> 
+    </div>
+    <div class="col-xs-2" >
+     
+      <h3><a style="color:white" href="/" ><span class="glyphicon glyphicon-home"  ></span> </a></h3>
+      <h3><a style="color:white" href="/signup/{{info.pk}}" ><span class="glyphicon glyphicon-edit"  ></span> </a></h3>
+
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+{% endfor %}
+
+<!-- UPLOAD RESUME  -->
+<form method = "POST" action="/update-resume" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="container">
+    <div class="card text-white">
+        <div class="row">
+            <div class="col-xs-6" style="padding-left:12px">
+                <div class="file btn btn-lg btn-primary">
+                    Update Resume
+                    <input type="file" name="resume"/>
+                </div>
+            </div>
+
+            <div class="col-xs-2" style="padding-top:20px" >
+                <input type=submit class="btn btn-primary" value="Update" name="update_resume">
+            </div>
+
+            <div class="col-xs-4" style="padding-top:30px" >
+                {% if user_resume %}
+                <a href="media/{{user_resume.resume}}" target="_blank">View Your Resume</a>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+</form>
+
+
+{% if count > 0 %}
+{% for profile in profiles %}
+ <div class="container">
+    <div class="card " style="background-color:white"><br>
+<div class="row" style="padding-bottom:20px">
+    <div class="col-xs-5" >
+    <h5 style="padding-left:20px"><b>Headline of profile</b></h5> 
+   
+    </div><br>
+     <div class="col-xs-6">
+         <p>{{ profile.hedline }}</p> 
+     </div>
+     <div class="col-xs-1">
+      <a href="/profile_update/{{ profile.id }}" ><span class="glyphicon glyphicon-pencil"></span> </a>
+     </div>
+    </div>
+</div>
+  
+
+{% comment %}  {% endcomment %}
+
+    <div class="card " style="background-color:white"><br>
+<div class="row" style="padding-bottom:20px">
+    <div class="col-xs-5" >
+    <h5 style="padding-left:20px"><b>Experiense</b></h5> 
+    </div><br>
+     <div class="col-xs-7">
+         <p>{{ profile.experiences|linebreaks }}</p>
+     </div>
+    
+    </div>
+
+
+{% comment %}  {% endcomment %}
+
+    <div class="card " style="background-color:white"><br>
+<div class="row" style="padding-bottom:20px">
+    <div class="col-xs-5" >
+    <h5 style="padding-left:20px"><b>Key-Skils</b></h5> 
+    </div><br>
+     <div class="col-xs-7">
+         <p>{{ profile.skills }}</p> 
+     </div>
+    
+    </div>
+</div>
+
+</div>
+ {% endfor %} 
+{% comment %} {% endif %} {% endcomment %}
+
+{% else %}
+
+{% if messages %}
+{% for message in messages %}
+<div id="snackbar">{{ message }}</div>
+ {% endfor %}
+{% endif %}
+
+<script>
+
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+</script>
+ <div class="container">
+    <div class="card " style="background-color:white"><br>
+<div class="row" style="padding-bottom:20px">
+    <div class="col-xs-5" >
+    <h5 style="padding-left:20px"><b>Headline of profile</b></h5> 
+   
+    </div><br>
+     <div class="col-xs-6">
+         <p>N.A</p> 
+     </div>
+     <div class="col-xs-1">
+      <a href="/profile_insert" ><span class="glyphicon glyphicon-pencil"></span> </a>
+     </div>
+    </div>
+</div>
+  
+
+{% comment %}  {% endcomment %}
+
+    <div class="card " style="background-color:white"><br>
+<div class="row" style="padding-bottom:20px">
+    <div class="col-xs-5" >
+    <h5 style="padding-left:20px"><b>Experiense</b></h5> 
+    </div><br>
+     <div class="col-xs-7">
+         <p>N.A</p> 
+     </div>
+    
+    </div>
+
+
+{% comment %}  {% endcomment %}
+
+    <div class="card " style="background-color:white"><br>
+<div class="row" style="padding-bottom:20px">
+    <div class="col-xs-5" >
+    <h5 style="padding-left:20px"><b>Key-Skils</b></h5> 
+    </div><br>
+     <div class="col-xs-7">
+         <p>N.A</p> 
+     </div>
+    
+    </div>
+</div>
+
+</div>
+{% endif %}
+<br>
+  <!-- Footer -->
+<div class="footer">
+  <p>2020 Coyright: @kash$ingh</p>
+</div>
+ </body>
+</html>

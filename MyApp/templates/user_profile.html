@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> {% endcomment %}
+
+  <style>
+
+  
+  body {
+    position: relative; 
+  }
+ 
+
+  </style>
+
+</head>
+<body>
+
+  <!-- Third Container (Grid) -->
+
+<form method = "POST" action="/user_profile1">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Skills</label>
+    <input type="text" class="form-control" id="name" name="skills" placeholder="enter skilla">
+    {% comment %} {{ form.name }}  {% endcomment %}
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Experiense in yesr/month</label>
+    <input type="text" class="form-control" id="email" name="exp" placeholder="exp">
+    {% comment %} {{ form.email }}  {% endcomment %}
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Languages</label>
+    <input type="text" class="form-control" id="phone" name="lang" placeholder="c++ ..">
+    {% comment %} {{ form.phone }}  {% endcomment %}
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Example textarea</label>
+    <textarea class="form-control" id="msg" name="msg" rows="3"></textarea>
+    {% comment %} {{ form.msg }}  {% endcomment %}
+  </div>
+  <input type=submit class="btn btn-primary">
+  {% comment %} <button type="button" class="btn btn-primary">Primary</button> {% endcomment %}
+</form>
+  
+ </body>
+</html>

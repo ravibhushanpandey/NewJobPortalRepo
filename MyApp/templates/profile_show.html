@@ -1,0 +1,45 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Employee Records</title>  
+     
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>  
+<body>  
+<h2>username is <b> {{ username }} </b></h2>
+<table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+    <tr>  
+        <th>Skills</th>  
+        <th>Experiense</th>  
+        <th>Programming languages</th>   
+          
+    </tr>  
+    </thead>  
+    <tbody>  
+{% for profile in profiles %}  
+    <tr>  
+        <td>{{ profile.skills }}</td>  
+        <td>{{ profile.experiencs }}</td>  
+        <td>{{ profile.languages }}</td>  
+          
+        
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table> 
+
+<script> 
+        function sure() { 
+           var result = confirm("Press OK to Delete"); 
+           if (result == false) { 
+                 window.location.assign("https://www.w3schools.com")
+           }
+            
+        } 
+</script> 
+</body>  
+</html>  

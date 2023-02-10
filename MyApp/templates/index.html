@@ -1,0 +1,645 @@
+{% if login %}
+ {% comment %} {% include "after_login.html" %} {% endcomment %}
+
+ <!DOCTYPE html>
+<html>
+<head>
+  <title>Home page</title>
+  <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> }
+  {% comment %} <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> {% endcomment %}
+  {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> {% endcomment %}
+   
+  
+
+  <style>
+
+
+
+  
+  body {
+    position: relative; 
+   
+  }
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+
+  
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+   margin-top:20px;
+   padding-left:0px; 
+   padding-right:0px; 
+  }
+  #contact{
+    width:100%;
+  }
+
+  @media screen and (min-width: 1124px) {
+  
+  .container{
+    margin-top:20px;
+    padding-left:90px; 
+    padding-right:90px; 
+  }
+  #contact{
+    width:65%;
+  }
+  }
+
+  
+
+  #snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+.footer {
+  
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding:30px;
+  background-color: gray;
+  color: white;
+  text-align: center;
+}
+
+  </style>
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<br><br>
+
+<nav class="navbar navbar-primary navbar-fixed-top " style="background-color:white">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" style="background-color:blue" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">My Vacancies</a>
+    </div>
+    <div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav ">
+          <li><a href="#section1">HOME</a></li>
+          <li><a href="#section2">JOB</a></li>
+          <li><a href="#section3">APPLIED-JOBS</a></li>
+          <li><a href="#section4">CONTACT-US</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        {% comment %} {% with name=username %}  {% endcomment %}
+        <li><a href="/profile_details"><span class="glyphicon glyphicon-user "></span> {{ username }}</a></li>
+        {% comment %} {% endwith %}  {% endcomment %}
+        <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      
+    </ul>
+      </div>
+    </div>
+  </div>
+</nav> 
+
+
+{% if messages %}
+{% for message in messages %}
+<div id="snackbar">{{ message }}</div>
+ {% endfor %}
+{% endif %}
+
+<script>
+
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+</script>
+
+{% comment %} ------section1 -------------- {% endcomment %}
+
+ <div id="section1" class="container-fluid">
+  <!-- First Container -->
+  {% comment %} <img src="/static/1.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350"> {% endcomment %}
+  <h3 class="margin bg-2 text-center">Your Profile</h3>
+  {% for sign in signup %}
+  <div class="container text-center ">
+<div class="card bg-primary">
+<br><br>
+<div class="row">
+    <div class="col-xs-3" ><br><br><br>
+     <p> Jobs {{ jobscount }}</p>
+    </div>
+    <div class="col-xs-6" >
+        {% if sign.profile_pic %}
+        <p align="center"><img src="/media/{{sign.profile_pic}}" class="img-responsive img-circle margin " alt="Avatar" style="width:20%"></p>
+        {% else %}
+        <p align="center"><img src="/static/user.jpg" class="img-responsive img-circle margin " alt="Avatar" style="width:20%"></p>
+        {% endif %}
+    <h2>{{ sign.name }}</h2>
+    {% for hedline in hedlines %}
+    <h4 style="padding-bottom:20px;"><b>{{ hedline.hedline }}</b></h4> 
+    {% endfor %}
+    </div>
+
+    <div class="col-xs-3" ><br><br><br>
+    <p>Applied {{ appliescount }}</p>
+    </div></div>
+  </div>
+</div>
+{% endfor %}
+</div>
+
+{% comment %} ------------------section2-------------------- {% endcomment %}
+
+<div id="section2" class="container-fluid">
+  <h3 class="margin bg-2 text-center">Jobs</h3>
+
+  {% if jobscount > 0 %}
+  {% for job in jobs %}
+  <div class="container">
+    <div class="card bg-info">
+<a href="#{{job.pk}}" data-toggle="collapse">
+    <div class="row">
+        <div class="col-xs-5" >
+            <h4 style="padding-left:20px" value="No Jobs To Appliy"><b>{{ job.title }}</b></h4>
+        </div>
+        <br>
+         <div class="col-xs-4">
+             <p>{{ job.exp }}</p>
+         </div>
+         <div class="col-xs-3">
+          <a href="/apply/{{ job.id }}" class= "btn btn-primary">Apply</a>
+         </div>
+    </div>
+
+    <br>
+    <div id="{{job.pk}}" class="collapse" style="padding-left:20px;">
+    <table width="100%">
+        <tr>
+            <td>
+                <b>Job Provider Name:</b> {{ job.job_pro_user.name }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Company Name:</b> {{ job.company }}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Email:</b> {{ job.job_pro_user.email }}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Contact:</b> {{ job.job_pro_user.contact }}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Location :</b> {{ job.company }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Job Details :</b> {{ job.details|linebreaks }}
+            </td>
+        </tr>
+    </table>
+    </div>
+
+</a>
+</div>
+</div>
+{% endfor %}
+{% else %}
+<p style="color:red" align="center">No Jobs To Apply !!</p>
+{% endif %}
+</div>
+{% comment %} section 4 {% endcomment %}
+
+<div id="section3" class="container-fluid">
+  <h3 class="margin bg-2 text-center">Applied Job</h3>
+
+  {% if appliescount > 0 %}
+  {% for apply in applies %}
+  <div class="container">
+    <div class="card bg-primary">
+        <a href="#{{apply.pk}}-apply" data-toggle="collapse" style="color:white">
+            <div class="row">
+                <div class="col-xs-4" >
+                    <h4 style="padding-left:20px"><b>{{ apply.title }}</b></h4>
+<!--                    <p style="padding-bottom:20px;padding-left:20px">{{ apply.details }}</p>-->
+                </div><br>
+                 <div class="col-xs-2">
+                     <p>{{ apply.exp }}</p>
+                 </div>
+                 <div class="col-xs-3">
+                     <p>{{ apply.apdate }}</p>
+                 </div>
+                 <div class="col-xs-3">
+                  <p style="background-color:green">Applied</p>
+                 </div>
+            </div>
+        </a>
+            <br>
+            <div id="{{apply.pk}}-apply" class="collapse" style="padding-left:20px;">
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <b>Job Provider Name:</b> {{ apply.jobid.job_pro_user.name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Company Name:</b> {{ apply.jobid.company }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <b>Email:</b> {{ apply.jobid.job_pro_user.email }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <b>Contact:</b> {{ apply.jobid.job_pro_user.contact }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <b>Location :</b> {{ apply.jobid.company }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Job Details :</b> {{ apply.jobid.details|linebreaks }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+</div>
+</div>
+{% endfor %}
+{% else %}
+<p style="color:red" align="center">You Didn't Applied Any Jobs !!</p>
+{% endif %}
+</div>
+
+
+
+
+{% comment %} -----------section3 --------------------- {% endcomment %}
+<div id="section4" class="container-fluid">
+<h3 class="margin bg-2 text-center">Contact-Us</h3>
+ <div class="container">
+    <div class="card " style="background-color:white"><br>
+
+<!-- Third Container (Grid) -->
+<div class="container-fluid bg-3" id="contact" >    
+  <form method = "POST" action="">
+{% csrf_token %}
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Name</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="enter name" required>
+    {% comment %} {{ form.name }}  {% endcomment %}
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+    {% comment %} {{ form.email }}  {% endcomment %}
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Phone Number</label>
+    <input type="Number" class="form-control" id="phone" name="phone" placeholder="9267758998" required>
+    {% comment %} {{ form.phone }}  {% endcomment %}
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Message</label>
+    <textarea class="form-control" id="msg" name="msg" rows="3" required></textarea>
+    {% comment %} {{ form.msg }}  {% endcomment %}
+  </div>
+  <input type=submit class="btn btn-primary">
+  {% comment %} <button type="button" class="btn btn-primary">Primary</button> {% endcomment %}
+</form><br><br>
+  
+</div>
+
+</div>
+</div>
+</div>
+  </div>
+  <br>
+ <div class="footer">
+  <p>2020 Coyright: @Rohit</p>
+</div>
+<!-- Footer -->
+ </body>
+</html>
+
+{% else %}
+
+{% block foo %}
+   {% comment %} {% include "before_login.html" %} {% endcomment %}
+   <!DOCTYPE html>
+<html>
+<head>
+  <title>Home Page</title>
+  <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> }
+  {% comment %} <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> {% endcomment %}
+  {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> {% endcomment %}
+   
+  
+
+  <style>
+  
+  body {
+    position: relative; 
+    {% comment %} background-color: gray    {% endcomment %}
+  }
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+
+  
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+   margin-top:20px;
+   padding-left:0px; 
+   padding-right:0px; 
+  }
+  #contact{
+    width:100%;
+  }
+
+  @media screen and (min-width: 1124px) {
+  
+  .container{
+    margin-top:20px;
+    padding-left:90px; 
+    padding-right:90px; 
+  }
+  #contact{
+    width:65%;
+  }
+  }
+  
+
+  #snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+.footer {
+  
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding:30px;
+  background-color: gray;
+  color: white;
+  text-align: center;
+
+  </style>
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<br><br>
+
+<nav class="navbar navbar-primary navbar-fixed-top " style="background-color:white">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" style="background-color:blue;" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">My Vacancies</a>
+    </div>
+    <div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav ">
+          <li><a href="#section1">HOME</a></li>
+          <li><a href="#section2">JOB</a></li>
+          <li><a href="#section3">CONTACT-US</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+         <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      
+    </ul>
+      </div>
+    </div>
+  </div>
+</nav> 
+
+
+{% if messages %}
+{% for message in messages %}
+<div id="snackbar">{{ message }}</div>
+ {% endfor %}
+{% endif %}
+
+<script>
+
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+</script>
+
+{% comment %} ------section1 -------------- {% endcomment %}
+
+ <div id="section1" class="container-fluid">
+  <!-- First Container -->
+  {% comment %} <img src="/static/1.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350"> {% endcomment %}
+  {% comment %} <h3 class="margin bg-2 text-center">Your Profile</h3> {% endcomment %}
+  <div class="container text-center ">
+<div class="card bg-primary">
+<br><br>
+  {% comment %} <p align="center"><img src="/static/1.jpg" class="img-responsive img-circle margin " alt="Avatar" style="width:20%"></p> {% endcomment %}
+    <h4><b>Welcom To The My Vacancies!!</b></h4>
+    <p style="padding-bottom:20px">Get Your Dream Job Here !!</p> 
+  </div>
+</div>
+</div>
+{% comment %} ------------------section2-------------------- {% endcomment %}
+
+<div id="section2" class="container-fluid">
+  <h3 class="margin bg-2 text-center">Job</h3>
+  {% for job in jobs %}
+  <div class="container">
+    <div class="card bg-info " ><br>
+<div class="row">
+    <div class="col-xs-5" >
+    <h4 style="padding-left:20px"><b>{{ job.title }}</b></h4> 
+    <p style="padding-bottom:20px;padding-left:20px">{{ job.details }}</p> 
+    </div><br>
+     <div class="col-xs-4">
+         <p>{{ job.exp }}</p> 
+     </div>
+     <div class="col-xs-3">
+      <a href="/apply/{{ job.id }}" class= "btn btn-primary">Apply</a>
+     </div>
+    </div>
+</div>
+</div>
+{% endfor %}
+
+</div>
+{% comment %} -----------section3 --------------------- {% endcomment %}
+<div id="section3" class="container-fluid">
+<h3 class="margin bg-2 text-center">Contact-Us</h3>
+ <div class="container">
+    <div class="card bg-light"><br>
+
+<!-- Third Container (Grid) -->
+<div class="container-fluid bg-3" id="contact" >    
+  <form method = "POST" action="">
+{% csrf_token %}
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Name</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="enter name" required>
+    {% comment %} {{ form.name }}  {% endcomment %}
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required> 
+    {% comment %} {{ form.email }}  {% endcomment %}
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Phone Number</label>
+    <input type="number" class="form-control" id="phone" name="phone" placeholder="name@example.com" required>
+    {% comment %} {{ form.phone }}  {% endcomment %}
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Message</label>
+    <textarea class="form-control" id="msg" name="msg" rows="3" required></textarea>
+    {% comment %} {{ form.msg }}  {% endcomment %}
+  </div>
+  <input type=submit class="btn btn-primary">
+  {% comment %} <button type="button" class="btn btn-primary">Primary</button> {% endcomment %}
+</form><br><br>
+  
+</div>
+
+</div>
+</div>
+</div>
+  </div>
+
+ <br>
+ <div class="footer">
+  <p>2020 Coyright: @kash$ingh</p>
+</div>
+<!-- Footer -->
+ </body>
+</html>
+
+{% endblock %}
+{% endif %}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  background-color: #337AB7;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+<!--table-->
+
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+    <a href="/dashboard-job-provider/{{job_pro_id}}">Jobs</a>
+    <a class="active" href="/applied-job/{{job_pro_id}}">Applied</a>
+    <a href="/login-job-provider">Logout</a>
+</div>
+
+<div class="content">
+
+    <h2>Admin Dashboard (Job Provider)</h2><br><br>
+
+<!--    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for title.." title="Type in a name">-->
+
+    <table id="myTable">
+        <tr class="header">
+            <th style="width:10%;">Name</th>
+            <th style="width:10%;">Contact</th>
+            <th style="width:10%;">Email</th>
+            <th style="width:10%;">Experience</th>
+            <th style="width:20%;">Applied For</th>
+            <th style="width:25%;">Skills</th>
+            <th style="width:20%;">Applied At</th>
+            <th style="width:5%;">Resume</th>
+
+        </tr>
+        {% for app_jobs in applied_jobs_obj %}
+        <tr>
+            <td>{{ app_jobs.userid.name }}</td>
+            <td>{{ app_jobs.userid.contact }}</td>
+            <td>{{ app_jobs.userid.email }}</td>
+            <td>{{ app_jobs.user_profile.experiences }}</td>
+            <td>{{ app_jobs.jobid.title }}</td>
+            <td>{{ app_jobs.user_profile.skills }}</td>
+            <td>{{ app_jobs.created_at }}</td>
+            <td><a href="/media/{{ app_jobs.user_profile.resume }}" target="_blank">Resume</a></td>
+
+        </tr>
+        {% endfor %}
+
+    </table>
+
+<!--    <script>-->
+<!--function myFunction() {-->
+<!--  var input, filter, table, tr, td, i, txtValue;-->
+<!--  input = document.getElementById("myInput");-->
+<!--  filter = input.value.toUpperCase();-->
+<!--  table = document.getElementById("myTable");-->
+<!--  tr = table.getElementsByTagName("tr");-->
+<!--  for (i = 0; i < tr.length; i++) {-->
+<!--    td = tr[i].getElementsByTagName("td")[1];-->
+<!--    if (td) {-->
+<!--      txtValue = td.textContent || td.innerText;-->
+<!--      if (txtValue.toUpperCase().indexOf(filter) > -1) {-->
+<!--        tr[i].style.display = "";-->
+<!--      } else {-->
+<!--        tr[i].style.display = "none";-->
+<!--      }-->
+<!--    }-->
+<!--  }-->
+<!--}-->
+<!--</script>-->
+</div>
+
+</body>
+</html>

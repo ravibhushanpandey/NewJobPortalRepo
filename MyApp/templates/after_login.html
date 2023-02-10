@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> }
+  {% comment %} <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> {% endcomment %}
+  {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> {% endcomment %}
+   
+  
+
+  <style>
+
+
+
+  
+  body {
+    position: relative; 
+    background-color: gray   
+  }
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+
+  
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+   margin-top:20px;
+   padding-left:90px; 
+   padding-right:90px; 
+  }
+
+  {% comment %} .container-job {
+   margin-top:20px;
+   padding-left:90px; 
+   padding-right:90px; 
+  } {% endcomment %}
+ 
+
+
+  {% comment %} #section2 {padding-top:50px;height:500px;color: #fff; background-color:#474e5d;}
+  #section3 {padding-top:50px;height:500px;color: #fff; background-color:#ADD8E6;}
+  #section1 {padding-top:50px;height:500px;} {% endcomment %}
+  
+
+  #snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+  </style>
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<br><br>
+
+<nav class="navbar navbar-default navbar-fixed-top ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav ">
+          <li><a href="#section1">HOME</a></li>
+          <li><a href="#section2">JOB</a></li>
+          <li><a href="#section3">CONTACT-US</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        {% comment %} {% with name=username %}  {% endcomment %}
+        <li><a href="/profile_details"><span class="glyphicon glyphicon-log-in"></span> {{ username }}</a></li>
+        {% comment %} {% endwith %}  {% endcomment %}
+        <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      
+    </ul>
+      </div>
+    </div>
+  </div>
+</nav> 
+
+
+{% if messages %}
+{% for message in messages %}
+<div id="snackbar">{{ message }}</div>
+ {% endfor %}
+{% endif %}
+
+<script>
+
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+</script>
+
+{% comment %} ------section1 -------------- {% endcomment %}
+
+ <div id="section1" class="container-fluid">
+  <!-- First Container -->
+  {% comment %} <img src="/static/1.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350"> {% endcomment %}
+  <h3 class="margin bg-2 text-center">Your Profile</h3>
+  <div class="container text-center ">
+<div class="card " style="background-color:white">
+<br><br>
+  <p align="center"><img src="/static/1.jpg" class="img-responsive img-circle margin " alt="Avatar" style="width:20%"></p>
+    <h4><b>Akash Radheshyam Singh</b></h4> 
+    <p style="padding-bottom:20px">Full Stack Developer</p> 
+  </div>
+</div>
+</div>
+{% comment %} ------------------section2-------------------- {% endcomment %}
+
+<div id="section2" class="container-fluid">
+  <h3 class="margin bg-2 text-center">Job</h3>
+  <div class="container">
+    <div class="card " style="background-color:white"><br>
+<div class="row">
+    <div class="col-md-5" >
+    <h4 style="padding-left:20px"><b>Python Developer</b></h4> 
+    <p style="padding-bottom:20px;padding-left:20px">Django framework</p> 
+    </div><br>
+     <div class="col-md-5">
+         <p>Exp 0-5 years</p> 
+     </div>
+     <div class="col-md-2">
+      <a href="#" class= "btn btn-primary">Apply</a>
+     </div>
+    </div>
+</div>
+</div>
+
+{% comment %}  {% endcomment %}
+
+ <div class="container">
+    <div class="card " style="background-color:white"><br>
+<div class="row">
+    <div class="col-md-5" >
+    <h4 style="padding-left:20px"><b>Python Developer</b></h4> 
+    <p style="padding-bottom:20px;padding-left:20px">Django framework</p> 
+    </div><br>
+     <div class="col-md-5">
+         <p>Exp 0-5 years</p> 
+     </div>
+     <div class="col-md-2">
+      <a href="#" class= "btn btn-primary">Apply</a>
+     </div>
+    </div>
+</div>
+</div>
+
+{% comment %}  {% endcomment %}
+
+ <div class="container">
+    <div class="card " style="background-color:white"><br>
+<div class="row">
+    <div class="col-md-5" >
+    <h4 style="padding-left:20px"><b>Python Developer</b></h4> 
+    <p style="padding-bottom:20px;padding-left:20px">Django framework</p> 
+    </div><br>
+     <div class="col-md-5">
+         <p>Exp 0-5 years</p> 
+     </div>
+     <div class="col-md-2">
+      <a href="#" class= "btn btn-primary">Apply</a>
+     </div>
+    </div>
+</div>
+</div>
+
+</div>
+{% comment %} -----------section3 --------------------- {% endcomment %}
+<div id="section3" class="container-fluid">
+<h3 class="margin bg-2 text-center">Contact-Us</h3>
+ <div class="container">
+    <div class="card " style="background-color:white"><br>
+
+<!-- Third Container (Grid) -->
+<div class="container-fluid bg-3" style="margin-left:250px; margin-right:250px" >    
+  <form method = "POST" action="">
+{% csrf_token %}
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Name</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="enter name">
+    {% comment %} {{ form.name }}  {% endcomment %}
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+    {% comment %} {{ form.email }}  {% endcomment %}
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Phone Number</label>
+    <input type="text" class="form-control" id="phone" name="phone" placeholder="name@example.com">
+    {% comment %} {{ form.phone }}  {% endcomment %}
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Example textarea</label>
+    <textarea class="form-control" id="msg" name="msg" rows="3"></textarea>
+    {% comment %} {{ form.msg }}  {% endcomment %}
+  </div>
+  <input type=submit class="btn btn-primary">
+  {% comment %} <button type="button" class="btn btn-primary">Primary</button> {% endcomment %}
+</form><br><br>
+  
+</div>
+
+</div>
+</div>
+</div>
+  </div>
+  <!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+  <p>Bootstrap Theme Made By <a href="https://www.w3schools.com">www.w3schools.com</a></p> 
+</footer>
+ </body>
+</html>
