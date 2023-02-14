@@ -28,7 +28,7 @@ SECRET_KEY = '@s4)bp7)&1*ah6d-3*z1n5j**(xekquh%_p7zy@-9v@t*7h3@d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.162.129.242','*']
+ALLOWED_HOSTS = ['54.186.131.27','*']
 
 
 # Application definition
@@ -92,8 +92,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'job_take',
         'USER': 'sammy',
-        'PASSWORD': 'ravibhushanpandey',
-        'HOST': 'database.cxh2ckysctoc.us-west-2.rds.amazonaws.com',
+        'PASSWORD': 'rajanashok',
+        'HOST': 'database-1.cxh2ckysctoc.us-west-2.rds.amazonaws.com',
         'PORT': '3306',
         # 'OPTIONS': {
         #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
